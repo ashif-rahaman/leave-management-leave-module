@@ -13,6 +13,7 @@
         <link href="resources/stylesheets/genstyle.css" rel="stylesheet" type="text/css"/>
         <link href="resources/stylesheets/library/w3-theme-blue.css" rel="stylesheet" type="text/css"/>
         <link href="resources/stylesheets/library/w3.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/script/indexscript.js" type="text/javascript"></script>
     </head>
     <body class="w3-theme-light" style="font-family: 'Lato', sans-serif;">
 
@@ -25,15 +26,19 @@
 
             <div class="w3-row" style="margin-left: 33%">
                 <div class="w3-half w3-large">
-                    <form action="" method="POST">
+
+                    <!--login form-->
+
+                    <form method="POST">
+
                         <label class="">Userid ( or Email )</label>
-                        <input name="loginid" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., ashif-rahaman">
+                        <input name="loginid" onblur="idEmailValidator()" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., ashif-rahaman">
 
                         <label>Password</label>
-                        <input name="password" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray" type="password" placeholder="e.g., *********">
+                        <input name="password" onblur="passwordValidator()" class="w3-xlarge w3-input w3-round-large w3-light-gray" type="password" placeholder="e.g., *********">
 
                         <div class="w3-row w3-margin-top">
-                            <input type="submit" value="Login" class="w3-btn w3-theme-l1 w3-round" style="padding-left: 7%; padding-right: 7%;">
+                            <input type="button" value="Login" onclick="loginRequest()" class="w3-btn w3-theme-l1 w3-round" style="padding-left: 7%; padding-right: 7%;">
                             <a  href="signup" class="w3-half w3-right w3-text-theme" style="margin-top: 3%">Create an account</a>
                         </div>
                     </form>
