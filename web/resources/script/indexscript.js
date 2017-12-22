@@ -33,7 +33,7 @@ var idEmailValidator = function () {
             //as the field contain '@', it is not id
             id = false;
 
-            var filter = /^\w+@[a-zA-Z_]+?([.][a-zA-Z]{2,3}){1,2}$/;
+            var filter = /^\w+@[a-zA-Z_]+?([.][a-zA-Z]{2,3}){1,3}$/;
 
             //filed contains valid email
             if (filter.test(field.value)) {
