@@ -29,7 +29,7 @@
 
                     <!--login form-->
 
-                    <form method="POST">
+                    <form action="#" method="POST" onsubmit="return loginRequest()">
 
                         <label class="">Userid ( or Email )</label>
                         <input name="loginid" onblur="idEmailValidator()" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., ashif-rahaman">
@@ -38,7 +38,7 @@
                         <input name="password" onblur="passwordValidator()" class="w3-xlarge w3-input w3-round-large w3-light-gray" type="password" placeholder="e.g., *********">
 
                         <div class="w3-row w3-margin-top">
-                            <input type="button" value="Login" onclick="loginRequest()" class="w3-btn w3-theme-l1 w3-round" style="padding-left: 7%; padding-right: 7%;">
+                            <input type="submit" value="Login" class="w3-btn w3-theme-l1 w3-round" style="padding-left: 7%; padding-right: 7%;">
                             <a  href="signup" class="w3-half w3-right w3-text-theme" style="margin-top: 3%">Create an account</a>
                         </div>
                     </form>
