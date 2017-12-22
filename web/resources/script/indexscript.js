@@ -15,7 +15,6 @@ var password = false;
 
 
 /**
- * 
  * Email or username validator function
  * Color the border with 'red' color if the input is empty or invalid email
  * as well as indicate either 'id' or 'email' is ok, 
@@ -28,17 +27,38 @@ var idEmailValidator = function () {
 
     if (field.value !== '') {
 
+        //if the field is email
         if (field.value.indexOf('@') !== -1) {
 
-            //write code to validate email
+            //as the field contain '@', it is not id
+            id = false;
+
+            var filter = /^\w+@[a-zA-Z_]+?([.][a-zA-Z]{2,3}){1,2}$/;
+
+            //filed contains valid email
+            if (filter.test(field.value)) {
+
+                email = true;
+                redField = false;
+            } else {
+
+                //field contains '@' but not a valid email
+                redField = true;
+                email = false;
+            }
         } else {
 
+            //if the field is id
             id = true;
+            email = false;
+            redField = false;
         }
     } else {
 
         //if field is empty
         redField = true;
+        id = false;
+        email = false;
     }
 
     if (redField) {
@@ -52,7 +72,6 @@ var idEmailValidator = function () {
 
 
 /**
- * 
  * Password validator function
  * Color the border with 'red' color if the input is empty
  * as well as indicate 'password' is ok, 
@@ -79,18 +98,19 @@ var loginRequest = function () {
 
     if ((id || email) && password) {
 
-        //write the code if the inputs are valid
+        return true;
 
-    } else {
-
-        if (!id && !email) {
-
-            idEmailValidator();
-        }
-
-        if (!password) {
-
-            passwordValidator();
-        }
     }
+
+    if (!id && !email) {
+
+        idEmailValidator();
+    }
+
+    if (!password) {
+
+        passwordValidator();
+    }
+
+    return false;
 };
