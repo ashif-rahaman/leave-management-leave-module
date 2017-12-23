@@ -33,7 +33,17 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("index.jsp");
+        String user = (String) request.getSession().getAttribute("userKey");
+
+        if (user != null) {
+
+            response.sendRedirect("home");
+            return;
+        } else {
+
+            response.sendRedirect("index.jsp");
+            return;
+        }
     }
 
     /**
@@ -47,6 +57,18 @@ public class IndexController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String user = (String) request.getSession().getAttribute("userKey");
+
+        if (user != null) {
+
+            response.sendRedirect("home");
+            return;
+        } else {
+
+            response.sendRedirect("index.jsp");
+            return;
+        }
     }
 
     /**
