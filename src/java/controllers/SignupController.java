@@ -26,13 +26,35 @@ public class SignupController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("signup.jsp");
+        String user = (String) request.getSession().getAttribute("userKey");
+
+        if (user != null) {
+
+            response.sendRedirect("home");
+            return;
+        } else {
+
+            response.sendRedirect("signup.jsp");
+            return;
+        }
     }
 
 //      Handles the HTTP <code>POST</code> method.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String user = (String) request.getSession().getAttribute("userKey");
+
+        if (user != null) {
+
+            response.sendRedirect("home");
+            return;
+        } else {
+
+            response.sendRedirect("signup.jsp");
+            return;
+        }
     }
 
     /**
