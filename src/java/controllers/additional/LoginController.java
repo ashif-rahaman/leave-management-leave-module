@@ -5,7 +5,10 @@
  */
 package controllers.additional;
 
+import db.core.ConnectToDatabase;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +29,15 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("index.jsp");
+        String user = (String) request.getSession().getAttribute("userKey");
+
+        if (user == null) {
+
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+        response.sendRedirect("home");
     }
 
     //HTTP POST Request Handler
@@ -38,8 +49,60 @@ public class LoginController extends HttpServlet {
 
         if (user == null) {
 
+            ConnectToDatabase connection = new ConnectToDatabase();
+
             String loginId = request.getParameter("loginid").trim();
             String password = request.getParameter("password");
+
+            if (loginId != null && password != null) {
+
+                String sql;
+
+                if (loginId.indexOf('@') == -1) {
+
+                    sql = "SELECT * FROM users WHERE username = '" + loginId + "'";
+                } else {
+
+                    sql = "SELECT * FROM users WHERE email = '" + loginId + "'";
+                }
+
+                ResultSet resultSet = connection.getResult(sql);
+
+                try {
+                    if (resultSet.next()) {
+
+                        if (resultSet.getString("password").equals(password)) {
+
+                            request.getSession().setAttribute("userKey", loginId);
+                            response.sendRedirect("home");
+                            return;
+                        } else {
+
+                            String msg = "Invalid username or password";
+                            request.setAttribute("login_error_msg", msg);
+                            request.getSession().setAttribute("userKey", null);
+
+                            response.sendRedirect("index.jsp");
+                            return;
+                        }
+                    } else {
+
+                        String msg = "Invalid username or password";
+                        request.setAttribute("login_error_msg", msg);
+                        request.getSession().setAttribute("userKey", null);
+
+                        response.sendRedirect("index.jsp");
+                        return;
+                    }
+                } catch (SQLException ex) {
+
+                    System.err.println(ex.toString());
+                }
+            }
+        } else {
+
+            response.sendRedirect("home");
+            return;
         }
     }
 
