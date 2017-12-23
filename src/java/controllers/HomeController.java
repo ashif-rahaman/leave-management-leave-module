@@ -30,11 +30,11 @@ public class HomeController extends HttpServlet {
 
         if (user != null) {
 
-            response.sendRedirect("home");
+            response.sendRedirect("home.jsp");
             return;
         } else {
 
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index");
             return;
         }
     }
@@ -48,11 +48,11 @@ public class HomeController extends HttpServlet {
 
         if (user != null) {
 
-            response.sendRedirect("home");
+            response.sendRedirect("home.jsp");
             return;
         } else {
 
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index");
             return;
         }
     }
