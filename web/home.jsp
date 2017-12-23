@@ -14,6 +14,7 @@
         <link href="resources/stylesheets/genstyle.css" rel="stylesheet" type="text/css"/>
         <link href="resources/stylesheets/library/w3-theme-blue.css" rel="stylesheet" type="text/css"/>
         <link href="resources/stylesheets/library/w3.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/script/homescript.js" type="text/javascript"></script>
     </head>
 </head>
 <body>
@@ -22,6 +23,7 @@
         <div class="navbar-menu">
             <span class="menu-item w3-hover-text-black" onclick="">My Application</span>
             <span class="menu-item w3-hover-text-black" onclick="">Pending Application</span>
+            <a href="logout"><span class="menu-item w3-hover-text-red w3-text-dark-gray">Logout</span></a>
         </div>
     </div>
 </body>
