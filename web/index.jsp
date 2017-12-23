@@ -29,7 +29,7 @@
 
                     <!--login form-->
 
-                    <form action="#" method="POST" onsubmit="return loginRequest()">
+                    <form action="login" method="POST" onsubmit="return loginRequest()">
 
                         <label class="">Userid ( or Email )</label>
                         <input name="loginid" onblur="idEmailValidator()" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., ashif-rahaman">
