@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "IndexController", urlPatterns = {"/index"})
+@WebServlet(name = "IndexController", urlPatterns = {"/index", "/index.jsp"})
 public class IndexController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

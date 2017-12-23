@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
+@WebServlet(name = "HomeController", urlPatterns = {"/home", "/home.jsp"})
 public class HomeController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

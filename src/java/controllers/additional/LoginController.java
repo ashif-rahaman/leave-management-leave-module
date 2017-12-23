@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
+@WebServlet(name = "LoginController", urlPatterns = {"/login", "/login.jsp"})
 public class LoginController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

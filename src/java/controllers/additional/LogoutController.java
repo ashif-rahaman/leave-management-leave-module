@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
+@WebServlet(name = "LogoutController", urlPatterns = {"/logout", "/logout.jsp"})
 public class LogoutController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

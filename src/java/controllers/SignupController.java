@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/signup"})
+@WebServlet(name = "SignupController", urlPatterns = {"/signup", "/signup.jsp"})
 public class SignupController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
