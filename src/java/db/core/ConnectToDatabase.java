@@ -78,9 +78,20 @@ public class ConnectToDatabase {
 
         try {
 
-            this.connection.close();
-            this.statement.close();
-            this.resultSet.close();
+            if (this.connection != null) {
+
+                this.connection.close();
+            }
+
+            if (this.statement != null) {
+
+                this.statement.close();
+            }
+
+            if (this.resultSet != null) {
+
+                this.resultSet.close();
+            }
             this.sql = null;
         } catch (SQLException e) {
 
