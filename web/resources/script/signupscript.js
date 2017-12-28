@@ -82,8 +82,33 @@ var emailValidator = function (str) {
  * @param {type} str
  * @returns {undefined}
  */
-var passwordValidator = function (str) {
+var passwordValidator = function (passwordValue) {
 
+    var passwordLengthMsg = document.getElementById('password_length_msg');
+    var passwordField = document.getElementsByName('password')[0];
+    var sign = document.getElementById('password_sign');
+
+    if (passwordValue.length < 8) {
+
+        password = false;
+
+        passwordField.style.borderColor = '#fc0000';
+        sign.innerHTML = ' &#x2716;';
+        sign.style.color = '#fc0000';
+
+        passwordLengthMsg.innerHTML = ' (at least 8 character long)';
+        passwordLengthMsg.style.color = '#fc0000';
+        passwordLengthMsg.style.visibility = 'visible';
+    } else {
+
+        password = true;
+
+        passwordField.style.borderColor = '#4ef442';
+        sign.innerHTML = ' &#x2714;';
+        sign.style.color = '#4ef442';
+
+        passwordLengthMsg.style.visibility = 'hidden';
+    }
 };
 
 /**
