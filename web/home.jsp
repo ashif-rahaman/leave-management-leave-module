@@ -3,7 +3,13 @@
     Created on : Dec 19, 2017, 4:02:45 PM
     Author     : ashif
 --%>
-
+<%
+    String user = (String) request.getSession().getAttribute("userKey");
+    if (user == null) {
+        
+        response.sendRedirect("index");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +29,7 @@
         <div class="navbar-menu">
             <span class="menu-item w3-hover-text-black" onclick="">My Application</span>
             <span class="menu-item w3-hover-text-black" onclick="">Pending Application</span>
-            <a href="logout"><span class="menu-item w3-hover-text-red w3-text-dark-gray">Logout</span></a>
+            <a href="logout" style="text-decoration: none;"><span class="menu-item w3-hover-text-red w3-text-dark-gray">Logout</span></a>
         </div>
     </div>
 </body>

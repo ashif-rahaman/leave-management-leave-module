@@ -3,7 +3,13 @@
     Created on : Dec 17, 2017, 9:36:05 PM
     Author     : ashif
 --%>
+<%
+    String user = (String) request.getSession().getAttribute("userKey");
+    if (user != null) {
 
+        response.sendRedirect("home");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
