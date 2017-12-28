@@ -47,8 +47,8 @@
                         <label class="">Email</label>
                         <input name="email" onkeyup="emailValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="e.g., email@example.com"><span id="email_sign"></span><br>
 
-                        <label class="">Password</label>
-                        <input name="password" onkeyup="passwordValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="e.g., *********"><span id="password_sign"></span><br>
+                        <label class="">Password</label><span id="password_length_msg"></span>
+                        <input name="password" onkeyup="passwordValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="password" placeholder="e.g., *********"><span id="password_sign"></span><br>
 
                         <label>Repeat Password</label>
                         <input name="repeat_password" onkeyup="repeatPasswordValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray" style="display: inline" type="password" placeholder="e.g., *********"><span id="repeat_password_sign"></span><br>
