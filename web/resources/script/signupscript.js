@@ -7,40 +7,92 @@ var repeat_password = false;
 
 /**
  * 
+ * @param {type} firstName
  * @returns {undefined}
  */
-var firstNameValidator = function (str) {
+var firstNameValidator = function (firstName) {
 
-    if (str.length != 0) {
+    firstName = firstName.trim();
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
+    var firstName_field = document.getElementsByName('first_name')[0];
+    var sign = document.getElementById('first_name_sign');
 
-            console.log('Ready state' + xmlhttp.readyState);
-            console.log('Status' + xmlhttp.status);
+    if (firstName.length != 0) {
 
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        first_name = true;
+        firstName_field.style.borderColor = '#4ef442';
+        sign.innerHTML = ' &#x2714;';
+        sign.style.color = '#4ef442';
+    } else {
 
-                console.log('response came');
-                console.log(xmlhttp.responseText);
-            }
-        };
-
-        xmlhttp.open('GET', 'getusers?name=' + str, true);
-        xmlhttp.send();
-
-        console.log('request sent');
+        first_name = false;
+        firstName_field.style.borderColor = '#fc0000';
+        sign.innerHTML = ' &#x2716;';
+        sign.style.color = '#fc0000';
     }
 };
 
 /**
  * 
+ * @param {type} str
  * @returns {undefined}
  */
-var lastNameValidator = function () {
+var lastNameValidator = function (lastName) {
 
-    var field = document.getElementsByName('last_name')[0];
-    console.log(field.value);
+    lastName = lastName.trim();
+
+    var sign = document.getElementById('last_name_sign');
+    var lastName_field = document.getElementsByName('last_name')[0];
+
+    if (lastName.length != 0) {
+
+        last_name = true;
+        lastName_field.style.borderColor = "#4ef442";
+        sign.innerHTML = ' &#x2714;';
+        sign.style.color = '#4ef442';
+    } else {
+
+        last_name = false;
+        lastName_field.style.borderColor = "#fc0000";
+        sign.innerHTML = ' &#x2716;';
+        sign.style.color = '#fc0000';
+    }
+};
+
+/**
+ * 
+ * @param {type} str
+ * @returns {undefined}
+ */
+var userNameValidator = function (str) {
+
+};
+
+/**
+ * 
+ * @param {type} str
+ * @returns {undefined}
+ */
+var emailValidator = function (str) {
+
+};
+
+/**
+ * 
+ * @param {type} str
+ * @returns {undefined}
+ */
+var passwordValidator = function (str) {
+
+};
+
+/**
+ * 
+ * @param {type} str
+ * @returns {undefined}
+ */
+var repeatPasswordValidator = function (str) {
+
 };
 
 /**
