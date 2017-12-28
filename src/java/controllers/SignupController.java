@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import db.util.DBExecutor;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/signup", "/signup.jsp"})
+@WebServlet(name = "SignupController", urlPatterns = {"/signup"})
 public class SignupController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +53,42 @@ public class SignupController extends HttpServlet {
             return;
         } else {
 
-            response.sendRedirect("signup.jsp");
-            return;
+            String firstName = request.getParameter("first_name");
+            String lastName = request.getParameter("last_name");
+            String username = request.getParameter("username");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            if (!(firstName == null || lastName == null
+                    || username == null || email == null || password == null)) {
+
+                if (!(firstName.isEmpty() || lastName.isEmpty()
+                        || username.isEmpty() || email.isEmpty() || password.isEmpty())) {
+
+                    String sql = "INSERT INTO users (first_name, last_name, email, username, password)"
+                            + "VALUES (\""
+                            + firstName + "\", \""
+                            + lastName + "\", \""
+                            + email + "\", \""
+                            + username + "\", \""
+                            + password + "\")";
+
+                    DBExecutor db = new DBExecutor();
+                    db.execute(sql);
+
+                    request.getSession().setAttribute("userKey", username);
+                    response.sendRedirect("home");
+                    return;
+                } else {
+
+                    response.sendRedirect("signup");
+                    return;
+                }
+            } else {
+
+                response.sendRedirect("signup");
+                return;
+            }
         }
     }
 
