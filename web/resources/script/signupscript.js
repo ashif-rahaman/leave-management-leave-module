@@ -57,8 +57,54 @@ var lastNameValidator = function (lastName) {
  * @param {type} str
  * @returns {undefined}
  */
-var userNameValidator = function (str) {
+var userNameValidator = function (usernameValue) {
 
+    var usernameField = document.getElementsByName('username')[0];
+    var sign = document.getElementById('username_sign');
+    var usernameMsg = document.getElementById('username_msg');
+
+    if (usernameValue.length === 0 ||
+            usernameValue.indexOf('@') !== -1 ||
+            usernameValue.indexOf('$') !== -1 ||
+            usernameValue.indexOf('%') !== -1 ||
+            usernameValue.indexOf('&') !== -1 ||
+            usernameValue.indexOf('*') !== -1 ||
+            usernameValue.indexOf('!') !== -1 ||
+            usernameValue.indexOf('#') !== -1 ||
+            usernameValue.indexOf('^') !== -1 ||
+            usernameValue.indexOf('(') !== -1 ||
+            usernameValue.indexOf(')') !== -1 ||
+            usernameValue.indexOf(' ') !== -1) {
+
+        username = false;
+        usernameField.style.borderColor = '#fc0000';
+        sign.innerHTML = ' &#x2716;';
+        sign.style.color = '#fc0000';
+
+        usernameMsg.innerHTML = ' (cannot contains special character \'@\', \'$\', \'%\', or space)';
+        usernameMsg.style.color = '#fc0000';
+        usernameMsg.style.visibility = 'visible';
+
+    } else {
+
+        usernameValue = usernameValue.trim();
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            console.log(this.readyState);
+            console.log(this.status);
+            if (this.readyState == 4 && this.status == 200) {
+
+                console.log(this.responseText);
+            }
+        };
+
+        xhttp.open("POST", "getuser", true);
+        xhttp.send(usernameValue);
+
+    }
+
+    usernameField.value = usernameField.value.trim();
 };
 /**
  * 
