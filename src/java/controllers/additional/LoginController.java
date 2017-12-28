@@ -75,7 +75,6 @@ public class LoginController extends HttpServlet {
 
                             request.getSession().setAttribute("userKey", loginId);
                             response.sendRedirect("home");
-                            return;
                         } else {
 
                             String msg = "Invalid username or password";
@@ -83,8 +82,9 @@ public class LoginController extends HttpServlet {
                             request.getSession().setAttribute("userKey", null);
 
                             response.sendRedirect("index.jsp");
-                            return;
                         }
+
+                        db.close();
                     } else {
 
                         String msg = "Invalid username or password";

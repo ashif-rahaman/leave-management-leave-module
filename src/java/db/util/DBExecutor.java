@@ -7,6 +7,7 @@ package db.util;
 
 import db.core.ConnectToDatabase;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,8 +26,18 @@ public class DBExecutor {
 
         ResultSet resultSet = connection.getResult(sql);
 
-        connection.closeConnection();
-
         return resultSet;
+    }
+
+    public boolean close() {
+
+        try {
+
+            this.connection.closeConnection();
+            return true;
+        } catch (SQLException ex) {
+
+            return false;
+        }
     }
 }

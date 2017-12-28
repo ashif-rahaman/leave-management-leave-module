@@ -74,7 +74,7 @@ public class ConnectToDatabase {
         return this.resultSet;
     }
 
-    public void closeConnection() {
+    public void closeConnection() throws SQLException {
 
         try {
 
@@ -95,8 +95,7 @@ public class ConnectToDatabase {
             this.sql = null;
         } catch (SQLException e) {
 
-            this.expections = e;
-            System.out.println(e.toString());
+            throw e;
         }
     }
 }
