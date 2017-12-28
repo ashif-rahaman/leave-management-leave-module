@@ -36,22 +36,22 @@
                 <div class="w3-half w3-large" style="padding-left: 10%">
                     <form action="signup" method="POST" onsubmit="return signupValidation()">
                         <label class="">First Name</label>
-                        <input name="first_name" onkeyup="firstNameValidator(this.value)" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., Ashifur">
+                        <input name="first_name" onkeyup="firstNameValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="e.g., Ashifur"><span id="first_name_sign"></span><br>
 
                         <label class="">Last Name</label>
-                        <input name="last_name" onkeyup="lastNameValidator()" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., Rahaman">
+                        <input name="last_name" onkeyup="lastNameValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="e.g., Rahaman"><span id="last_name_sign"></span><br>
 
                         <label class="">Username</label>
-                        <input name="username" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="Username to login">
+                        <input name="username" onkeyup="userNameValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="Username to login"><span id="username_sign"></span><br>
 
                         <label class="">Email</label>
-                        <input name="email" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., email@example.com">
+                        <input name="email" onkeyup="emailValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="e.g., email@example.com"><span id="email_sign"></span><br>
 
                         <label class="">Password</label>
-                        <input name="password" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray w3-margin-bottom" type="text" placeholder="e.g., *********">
+                        <input name="password" onkeyup="passwordValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray w3-margin-bottom" style="display: inline" type="text" placeholder="e.g., *********"><span id="password_sign"></span><br>
 
                         <label>Repeat Password</label>
-                        <input name="repeat_password" class="w3-xlarge w3-input w3-border w3-round-large w3-light-gray" type="password" placeholder="e.g., *********">
+                        <input name="repeat_password" onkeyup="repeatPasswordValidator(this.value)" class="w3-xlarge w3-input w3-round-large w3-light-gray" style="display: inline" type="password" placeholder="e.g., *********"><span id="repeat_password_sign"></span><br>
 
                         <div class="w3-row w3-margin-top">
                             <input type="submit" value="Sign Up" class="w3-btn w3-theme-l1 w3-round" style="padding-left: 7%; padding-right: 7%;">
