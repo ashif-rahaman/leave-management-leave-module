@@ -5,7 +5,7 @@
  */
 package controllers.additional;
 
-import db.core.ConnectToDatabase;
+import db.util.DBExecutor;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ashif
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login", "/login.jsp"})
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
 
         if (user == null) {
 
-            ConnectToDatabase connection = new ConnectToDatabase();
+            DBExecutor db = new DBExecutor();
 
             String loginId = request.getParameter("loginid").trim();
             String password = request.getParameter("password");
@@ -66,7 +66,7 @@ public class LoginController extends HttpServlet {
                     sql = "SELECT * FROM users WHERE email = '" + loginId + "'";
                 }
 
-                ResultSet resultSet = connection.getResult(sql);
+                ResultSet resultSet = db.execute(sql);
 
                 try {
                     if (resultSet.next()) {
