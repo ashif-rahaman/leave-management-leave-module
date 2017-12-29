@@ -85,22 +85,48 @@ var userNameValidator = function (usernameValue) {
         usernameMsg.style.color = '#fc0000';
         usernameMsg.style.visibility = 'visible';
 
+    } else if (usernameValue.trim().length < 5) {
+
+        usernameMsg.innerHTML = ' (at least 5 character long)';
+        usernameMsg.style.color = '#fc0000';
+        usernameMsg.style.visibility = 'visible';
+
+        usernameField.style.borderColor = "#fc0000";
+        sign.innerHTML = ' &#x2716;';
     } else {
 
         usernameValue = usernameValue.trim();
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
-            console.log(this.readyState);
-            console.log(this.status);
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log(this.responseText);
+                var result = JSON.parse(this.responseText);
+
+                if (result.wrong_param == 'false' && result.user == 'false') {
+
+                    usernameMsg.style.visibility = 'hidden';
+
+                    usernameField.style.borderColor = "#4ef442";
+                    sign.innerHTML = ' &#x2714;';
+                    sign.style.color = '#4ef442';
+                } else {
+
+                    usernameMsg.innerHTML = ' User already exist';
+                    usernameMsg.style.color = '#fc0000';
+                    usernameMsg.style.visibility = 'visible';
+
+                    usernameField.style.borderColor = "#fc0000";
+                    sign.innerHTML = ' &#x2716;';
+                    sign.style.color = '#fc0000';
+                }
             }
         };
 
-        xhttp.open("POST", "getuser", true);
-        xhttp.send(usernameValue);
+        var param = "username=" + usernameValue;
+
+        xhttp.open("GET", "getuser?" + param, true);
+        xhttp.send();
 
     }
 
