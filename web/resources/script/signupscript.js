@@ -62,9 +62,7 @@ var userNameValidator = function (usernameValue) {
     var usernameField = document.getElementsByName('username')[0];
     var sign = document.getElementById('username_sign');
     var usernameMsg = document.getElementById('username_msg');
-
-    if (usernameValue.length === 0 ||
-            usernameValue.indexOf('@') !== -1 ||
+    if (usernameValue.indexOf('@') !== -1 ||
             usernameValue.indexOf('$') !== -1 ||
             usernameValue.indexOf('%') !== -1 ||
             usernameValue.indexOf('&') !== -1 ||
@@ -80,54 +78,48 @@ var userNameValidator = function (usernameValue) {
         usernameField.style.borderColor = '#fc0000';
         sign.innerHTML = ' &#x2716;';
         sign.style.color = '#fc0000';
-
         usernameMsg.innerHTML = ' (cannot contains special character \'@\', \'$\', \'%\', or space)';
         usernameMsg.style.color = '#fc0000';
         usernameMsg.style.visibility = 'visible';
-
     } else if (usernameValue.trim().length < 5) {
 
         usernameMsg.innerHTML = ' (at least 5 character long)';
         usernameMsg.style.color = '#fc0000';
         usernameMsg.style.visibility = 'visible';
-
         usernameField.style.borderColor = "#fc0000";
         sign.innerHTML = ' &#x2716;';
+        sign.style.color = '#fc0000';
+        username = false;
     } else {
 
         usernameValue = usernameValue.trim();
-
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
 
                 var result = JSON.parse(this.responseText);
-
                 if (result.wrong_param == 'false' && result.user == 'false') {
 
                     usernameMsg.style.visibility = 'hidden';
-
                     usernameField.style.borderColor = "#4ef442";
                     sign.innerHTML = ' &#x2714;';
                     sign.style.color = '#4ef442';
+                    username = true;
                 } else {
 
                     usernameMsg.innerHTML = ' User already exist';
                     usernameMsg.style.color = '#fc0000';
                     usernameMsg.style.visibility = 'visible';
-
                     usernameField.style.borderColor = "#fc0000";
                     sign.innerHTML = ' &#x2716;';
                     sign.style.color = '#fc0000';
+                    username = false;
                 }
             }
         };
-
         var param = "username=" + usernameValue;
-
         xhttp.open("GET", "getuser?" + param, true);
         xhttp.send();
-
     }
 
     usernameField.value = usernameField.value.trim();
@@ -137,8 +129,68 @@ var userNameValidator = function (usernameValue) {
  * @param {type} str
  * @returns {undefined}
  */
-var emailValidator = function (str) {
+var emailValidator = function (emailValue) {
 
+    var emailField = document.getElementsByName('email')[0];
+    var sign = document.getElementById('email_sign');
+    var emailMsg = document.getElementById('email_msg');
+
+
+    if (emailValue !== '' && emailValue.indexOf('@') !== -1) {
+
+        var filter = /^(\w([.]\w)*)+@[a-zA-Z_]+?([.][a-zA-Z]{2,3}){1,3}$/;
+        if (filter.test(emailValue)) {
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var result = JSON.parse(this.responseText);
+                    if (result.wrong_param === 'false' && result.email === 'false') {
+
+                        emailField.style.borderColor = '#4ef442';
+                        sign.innerHTML = ' &#x2714;';
+                        sign.style.color = '#4ef442';
+
+                        emailMsg.style.visibility = 'hidden';
+
+                        email = true;
+                    } else {
+
+                        emailMsg.innerHTML = ' Email already exist';
+                        emailMsg.style.color = '#fc0000';
+                        emailMsg.style.visibility = 'visible';
+
+                        emailField.style.borderColor = '#fc0000';
+                        sign.innerHTML = ' &#x2716;';
+                        sign.style.color = '#fc0000';
+
+                        email = false;
+                    }
+                }
+            };
+
+            var param = "email=" + emailValue.trim();
+            xhttp.open("GET", "getemail?" + param, true);
+            xhttp.send();
+        } else {
+
+            emailMsg.style.visibility = 'hidden';
+            emailField.style.borderColor = '#fc0000';
+            sign.innerHTML = ' &#x2716;';
+            sign.style.color = '#fc0000';
+
+            email = false;
+        }
+    } else {
+
+        emailMsg.style.visibility = 'hidden';
+        emailField.style.borderColor = '#fc0000';
+        sign.innerHTML = ' &#x2716;';
+        sign.style.color = '#fc0000';
+
+        email = false;
+    }
 };
 /**
  * 
@@ -170,7 +222,6 @@ var passwordValidator = function (passwordValue) {
 
     var repeatPasswordValue = document.getElementsByName('repeat_password')[0].value;
     repeatPasswordValidator(repeatPasswordValue);
-
 };
 /**
  * 
@@ -182,7 +233,6 @@ var repeatPasswordValidator = function (repeatPasswordValue) {
     var repeatPasswordField = document.getElementsByName('repeat_password')[0];
     var sign = document.getElementById('repeat_password_sign');
     var passwordField = document.getElementsByName('password')[0];
-
     if (repeatPasswordValue.length != 0 && repeatPasswordValue == passwordField.value) {
 
         repeat_password = true;
