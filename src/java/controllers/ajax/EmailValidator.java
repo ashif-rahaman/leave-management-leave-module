@@ -5,7 +5,10 @@
  */
 package controllers.ajax;
 
+import db.util.DBExecutor;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "EmailValidator", urlPatterns = {"/getemail"})
 public class EmailValidator extends HttpServlet {
-
+    
     private static final long serialVersionUID = 1L;
 
     /**
@@ -32,8 +35,40 @@ public class EmailValidator extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
+        
+        String email = request.getParameter("email").trim();
+        String jsonReply = "{\"wrong_param\":";
+        
+        if (email != null && !email.isEmpty()) {
+            
+            jsonReply += "\"false\",\"email\":";
+            
+            String sql = "Select email FROM users WHERE email=\"" + email + "\"";
+            DBExecutor db = new DBExecutor();
+            
+            ResultSet resultSet = db.execute(sql);
+            
+            try {
+                
+                if (resultSet.next()) {
+                    
+                    jsonReply += "\"true\"}";
+                } else {
+                    
+                    jsonReply += "\"false\"}";
+                }
+                
+            } catch (SQLException e) {
+                
+                jsonReply = "{\"wrong_param\":\"true\"}";
+            }
+        } else {
+            
+            jsonReply = "{\"wrong_param\":\"true\"}";
+        }
+        
+        response.setContentType("text/JSON;charset=UTF-8");
+        response.getWriter().write(jsonReply);
     }
 
     /**
