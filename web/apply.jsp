@@ -54,7 +54,7 @@
 
         <!--right side-->
         <div class="w3-container w3-rest w3-card-4">
-            <form action="apply/insert" onsubmit="return applicationInsertValidator()">
+            <form method="POST" action="apply/insert" onsubmit="return applicationInsertValidator()">
                 <input id="apply_to" type="text" class="apply-input w3-large w3-input" placeholder="To : Harami Boss" disabled>
                 <input id="apply_subject" onblur="subjectValidator(this.value)" type="text" class="apply-input w3-input w3-xxlarge" placeholder="Subject">
                 <textarea id="apply_body" onblur="bodyValidator(this.value)" class="apply-input w3-input" placeholder="Write your application"></textarea>
