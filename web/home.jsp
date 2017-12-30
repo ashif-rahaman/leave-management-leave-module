@@ -23,7 +23,7 @@
         <script src="resources/script/homescript.js" type="text/javascript"></script>
     </head>
 </head>
-<body>
+<body onload="showPendingMenu()">
     <div class="navbar container w3-theme-l1 w3-row">
         <img src="resources/images/icons/leave-small.png" class="w3-center" height="100%" alt="leave-small"/>
         <div class="navbar-menu">
@@ -33,9 +33,9 @@
             <a href="" style="text-decoration: none;">
                 <span class="menu-item w3-hover-text-black" onclick="">My Application</span>
             </a>
-            <a href="" style="text-decoration: none;" class="w3-hover-text-black" onclick="">
+            <a id="pending_menu" onclick="" style="text-decoration: none; visibility: hidden" class="w3-hover-text-black">
                 <span class="menu-item">Pending Application</span>
-                <span id="notification" class="w3-badge w3-large w3-red" style="visibility: visible;"></span>
+                <span id="notification" class="w3-badge w3-large w3-red"></span>
             </a>
             <a href="logout" style="text-decoration: none;">
                 <span class="menu-item w3-hover-text-red w3-text-dark-gray">Logout</span>
