@@ -9,6 +9,8 @@
 
         response.sendRedirect("index");
     }
+
+    String name = (String) request.getSession().getAttribute("name");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,9 +23,10 @@
         <link href="resources/stylesheets/library/w3-theme-blue.css" rel="stylesheet" type="text/css"/>
         <link href="resources/stylesheets/library/w3.css" rel="stylesheet" type="text/css"/>
         <script src="resources/script/homescript.js" type="text/javascript"></script>
+        <script src="resources/script/manubarscript.js" type="text/javascript"></script>
     </head>
 </head>
-<body onload="showPendingMenu()">
+<body onload="showPendingMenu('<%= user%>')">
     <div class="navbar container w3-theme-l1 w3-row">
         <img src="resources/images/icons/leave-small.png" class="w3-center" height="100%" alt="leave-small"/>
         <div class="navbar-menu">
@@ -33,9 +36,9 @@
             <a href="" style="text-decoration: none;">
                 <span class="menu-item w3-hover-text-black" onclick="">My Application</span>
             </a>
-            <a id="pending_menu" onclick="" style="text-decoration: none; visibility: hidden" class="w3-hover-text-black">
+            <a id="pending_menu" onclick="" href="" style="text-decoration: none; visibility: hidden" class="w3-hover-text-black">
                 <span class="menu-item">Pending Application</span>
-                <span id="notification" class="w3-badge w3-large w3-red"></span>
+                <span id="notification" class="w3-badge w3-large w3-red w3-hover-green">6</span>
             </a>
             <a href="logout" style="text-decoration: none;">
                 <span class="menu-item w3-hover-text-red w3-text-dark-gray">Logout</span>
@@ -47,7 +50,7 @@
         <!--left side-->
         <div class="w3-container w3-col w3-padding-24" style="width: 20%">
             <img class="w3-center" src="resources/images/dummy/dummy_man.png" alt="dummy_man" width="70%" style="display: block"/>
-            <span id="name" style="display: block; padding: 20px 0px 0px 30px">Abdul Jobbar</span>
+            <span id="name" style="display: block; padding: 20px 0px 0px 30px"><%= name%></span>
         </div>
 
         <!--right side-->
