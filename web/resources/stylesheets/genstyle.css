@@ -38,3 +38,25 @@ body {
     border-radius: 5px;
     padding: 5px 5px 5px 10px;
 }
+
+.apply-input {
+
+    border-radius: 5px;
+    margin: 10px 10px 10px 10px;
+    padding: 5px 5px 5px 5px;
+}
+
+textarea {
+
+    resize: vertical;
+    height: 200px;
+}
+
+.input-button {
+
+    float: right;
+    padding: 0px 10px 0px 10px;
+    margin-bottom: 10px;
+    margin-right: 9%;
+    border-radius: 10px;
+}
