@@ -9,7 +9,12 @@
     if (user == null) {
 
         response.sendRedirect("index");
+        return;
     }
+
+    String applicant_name = (String) request.getSession().getAttribute("Applicant_Name");
+    String boss_name = (String) request.getSession().getAttribute("Super_Name");
+
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,9 +28,10 @@
         <link href="resources/stylesheets/library/w3-theme-blue.css" rel="stylesheet" type="text/css"/>
         <link href="resources/stylesheets/library/w3.css" rel="stylesheet" type="text/css"/>
         <script src="resources/script/applicationscript.js" type="text/javascript"></script>
+        <script src="resources/script/manubarscript.js" type="text/javascript"></script>
     </head>
 </head>
-<body>
+<body onload="showPendingMenu()">
     <div class="navbar container w3-theme-l1 w3-row">
         <img src="resources/images/icons/leave-small.png" class="w3-center" height="100%" alt="leave-small"/>
         <div class="navbar-menu">
@@ -35,9 +41,9 @@
             <a href="" style="text-decoration: none;">
                 <span class="menu-item w3-hover-text-black" onclick="">My Application</span>
             </a>
-            <a href="" style="text-decoration: none;" class="w3-hover-text-black" onclick="">
+            <a id="pending_menu" onclick="" style="text-decoration: none; visibility: hidden" class="w3-hover-text-black">
                 <span class="menu-item">Pending Application</span>
-                <span id="notification" class="w3-badge w3-large w3-red" style="visibility: visible;"></span>
+                <span id="notification" class="w3-badge w3-large w3-red"></span>
             </a>
             <a href="logout" style="text-decoration: none;">
                 <span class="menu-item w3-hover-text-red w3-text-dark-gray">Logout</span>
@@ -49,13 +55,13 @@
         <!--left side-->
         <div class="w3-container w3-col w3-padding-24" style="width: 20%">
             <img class="w3-center" src="resources/images/dummy/dummy_man.png" alt="dummy_man" width="70%" style="display: block"/>
-            <span id="name" style="display: block; padding: 20px 0px 0px 30px">Abdul Jobbar</span>
+            <span id="name" style="display: block; padding: 20px 0px 0px 30px"><%= applicant_name%></span>
         </div>
 
         <!--right side-->
         <div class="w3-container w3-rest w3-card-4">
             <form method="POST" action="apply/insert" onsubmit="return applicationInsertValidator()">
-                <input id="apply_to" type="text" class="apply-input w3-large w3-input" placeholder="To : Harami Boss" disabled>
+                <input id="apply_to" type="text" class="apply-input w3-large w3-input" <% if (boss_name != null) {%>placeholder="To : <%= boss_name%>"<% }%> disabled>
                 <input id="apply_subject" onblur="subjectValidator(this.value)" type="text" class="apply-input w3-input w3-xxlarge" placeholder="Subject">
                 <textarea id="apply_body" onblur="bodyValidator(this.value)" class="apply-input w3-input" placeholder="Write your application"></textarea>
                 <input type="submit" class="w3-button w3-theme-dark w3-hover-green w3-hover-text-white input-button w3-large" value="Apply">
@@ -64,3 +70,8 @@
     </div>
 </body>
 </html>
+
+<%
+    applicant_name = null;
+    boss_name = null;
+%>
