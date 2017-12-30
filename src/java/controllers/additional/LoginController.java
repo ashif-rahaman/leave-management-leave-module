@@ -73,6 +73,8 @@ public class LoginController extends HttpServlet {
 
                         if (resultSet.getString("password").equals(password)) {
 
+                            request.getSession().setAttribute("name",
+                                    resultSet.getString("first_name") + " " + resultSet.getString("last_name"));
                             request.getSession().setAttribute("userKey", loginId);
                             response.sendRedirect("home");
                         } else {
