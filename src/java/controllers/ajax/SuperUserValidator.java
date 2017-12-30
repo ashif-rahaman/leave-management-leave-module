@@ -5,7 +5,10 @@
  */
 package controllers.ajax;
 
+import db.util.DBExecutor;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +35,51 @@ public class SuperUserValidator extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String username = request.getParameter("username");
+        String jsonReply;
+
+        if ((username != null) && (!username.isEmpty())) {
+
+            jsonReply = "{\"wrong_param\":\"false\",";
+            jsonReply += "\"superuser\":";
+
+            DBExecutor db = new DBExecutor();
+
+            String sql = "SELECT id FROM users WHERE username = \"" + username + "\"";
+
+            ResultSet resultSet = db.execute(sql);
+            try {
+                if (resultSet.next()) {
+
+                    sql = "SELECT id FROM users WHERE super_id = " + resultSet.getInt("id");
+
+                    resultSet = db.execute(sql);
+
+                    if (resultSet.next()) {
+                        jsonReply += "\"true\"}";
+                    } else {
+
+                        jsonReply += "\"false\"}";
+                    }
+                } else {
+
+                    jsonReply += "\"false\"}";
+                }
+            } catch (SQLException ex) {
+
+                jsonReply += "\"false\"}";
+            }
+
+            db.close();
+        } else {
+
+            jsonReply = "{\"wrong_param\":\"true\"}";
+        }
+
+        response.setContentType("text/JSON;charset=UTF-8");
+        response.getWriter().write(jsonReply);
+
     }
 
     /**
