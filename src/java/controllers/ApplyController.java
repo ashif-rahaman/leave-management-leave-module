@@ -5,7 +5,10 @@
  */
 package controllers;
 
+import db.util.DBExecutor;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +36,70 @@ public class ApplyController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("apply.jsp");
+        String user = (String) request.getSession().getAttribute("userKey");
+
+        if (user != null) {
+
+            DBExecutor db = new DBExecutor();
+            String sqlApplicant = "Select first_name, last_name, super_id FROM users "
+                    + "WHERE username = '" + user + "'";
+
+            ResultSet applicant = db.execute(sqlApplicant);
+            try {
+
+                if (applicant.next()) {
+
+                    request.getSession().setAttribute("Applicant_Name",
+                            applicant.getString("first_name") + " " + applicant.getString("last_name"));
+
+                    String sqlBoss = "Select first_name, last_name FROM users "
+                            + "WHERE id = " + applicant.getInt("super_id");
+
+                    if (applicant.getInt("super_id") != 0) {
+
+                        DBExecutor bossDB = new DBExecutor();
+
+                        ResultSet boss = bossDB.execute(sqlBoss);
+
+                        if (boss.next()) {
+
+                            request.getSession().setAttribute("Super_Name",
+                                    boss.getString("first_name") + " " + boss.getString("last_name"));
+                        } else {
+
+                            request.getSession().setAttribute("Super_Name", null);
+                        }
+
+                        bossDB.close();
+                    } else {
+
+                        request.getSession().setAttribute("Super_Name", null);
+                    }
+
+                    response.sendRedirect("apply.jsp");
+
+                    db.close();
+                    return;
+                } else {
+
+                    response.sendRedirect("index.jsp");
+                    db.close();
+                    return;
+                }
+            } catch (SQLException e) {
+
+                System.err.println(e.toString());
+
+                response.sendRedirect("index.jsp");
+                db.close();
+                return;
+            }
+
+        } else {
+
+            response.sendRedirect("index.jsp");
+            return;
+        }
     }
 
     /**
